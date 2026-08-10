@@ -4,8 +4,28 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Next.js 15](https://img.shields.io/badge/Framework-Next.js%2015-black?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
 [![Database: SQLite](https://img.shields.io/badge/Database-SQLite%20Local--First-blueviolet?style=for-the-badge&logo=sqlite)](https://www.sqlite.org/)
+[![Status: Active Dev](https://img.shields.io/badge/Status-Active%20Development%20(80%25)-orange?style=for-the-badge)](https://github.com/postsoma-2050/VaultQuant/issues)
 
 **VaultQuant** is an open-source, local-first trading journal and quantitative campaign intelligence platform built for active traders and quant developers. It eliminates noisy execution fills by automatically clustering scale-in orders into clean **VWAP Trade Campaigns**, auditing trading discipline with **Multi-Model AI**, and ensuring 100% financial privacy via an embedded local SQLite database.
+
+---
+
+## 🚧 Project Status — Active Development (80%)
+
+> **This project is currently under active development. Most core features are functional and ready to use, but some areas are still being refined or extended.**
+
+| Module | Status |
+|---|---|
+| CSV Import & VWAP Campaign Clustering | ✅ Stable |
+| Trade Journal & Calendar Heatmap | ✅ Stable |
+| AI Strategy Auditor (Multi-Model) | ✅ Stable |
+| Performance Statistics & Reports | ✅ Stable |
+| Strategies Tracker | ✅ Stable |
+| Advanced Analytics & Benchmarks | 🔧 In Progress |
+| Mobile Responsive UI | 🔧 In Progress |
+| Multi-user / Auth Layer | 📋 Planned |
+
+**💡 Recommended Usage**: For the best experience, pair VaultQuant with an **AI coding agent** (e.g., Claude, Gemini, Cursor, Antigravity IDE) to automate setup, auto-generate `.env` configurations, and extend the platform with custom features tailored to your trading workflow.
 
 ---
 
@@ -100,6 +120,30 @@ AI_MODEL=llama3.3:70b
 - **Styling**: Tailwind CSS & Shadcn UI
 - **Animations**: GSAP & ScrollTrigger
 - **Parsing & Clustering**: Custom Campaign Engine & Broker CSV Sanitizer
+
+---
+
+## 🤝 Contributing & Feedback
+
+VaultQuant is an open, community-driven project. We warmly welcome all contributions — whether it's a bug fix, new feature, or improving documentation.
+
+### 🐛 Found a Bug or Issue?
+→ Please [open an Issue](https://github.com/postsoma-2050/VaultQuant/issues/new?template=bug_report.md) with:
+- A brief description of the problem
+- Steps to reproduce
+- Expected vs. actual behavior
+- Your OS, browser, and Node.js / Docker version
+
+### ✨ Have a Feature Request?
+→ [Open a Feature Request](https://github.com/postsoma-2050/VaultQuant/issues/new?template=feature_request.md) to suggest improvements or new capabilities you'd like to see.
+
+### 🔧 Want to Contribute Code?
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Commit your changes: `git commit -m "feat: describe your change"`
+4. Push and open a **Pull Request** against `main`
+
+> 💡 **Tip**: For larger features or architectural changes, open an Issue first to discuss the approach before implementing. AI coding agents (Claude, Gemini, etc.) can significantly accelerate your development workflow with this codebase.
 
 ---
 
