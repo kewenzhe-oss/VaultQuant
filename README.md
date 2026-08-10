@@ -48,24 +48,20 @@ git clone https://github.com/postsoma-2050/VaultQuant.git && cd VaultQuant && ./
 
 ## ⚡ Quick Start (Manual Setup)
 
-### 1. Clone & Install
+### Option A: Local Node.js / Bootstrap Script
 ```bash
 git clone https://github.com/postsoma-2050/VaultQuant.git
 cd VaultQuant
-npm install --legacy-peer-deps
+./scripts/bootstrap.sh
 ```
 
-### 2. Run Database Migrations
+### Option B: Docker Compose (NAS / VPS / Server Deployment)
 ```bash
-npm run db:generate
-npm run db:migrate
+git clone https://github.com/postsoma-2050/VaultQuant.git
+cd VaultQuant
+docker compose up -d
 ```
-
-### 3. Launch App
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) or [http://localhost:3001](http://localhost:3001) in your browser.
+The application will be available at [http://localhost:3000](http://localhost:3000), and all trade data will be automatically persisted to `./data/local.db`.
 
 ---
 
