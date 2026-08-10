@@ -4,7 +4,7 @@ import * as schema from "./schema";
 
 const dbUrl = process.env.DATABASE_URL || "file:local.db";
 
-const client = createClient({
+export const client = createClient({
     url: dbUrl,
 });
 
