@@ -6,7 +6,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ArrowRight, Github, Twitter } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const HomePageFooter = () => {
@@ -23,16 +23,15 @@ const HomePageFooter = () => {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            Join for free today
+                            Start Quantifying Your Edge
                         </div>
 
                         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight max-w-4xl">
-                            Join thousands of <span className="text-zinc-400">smart traders.</span>
+                            Join quantitative & <span className="text-zinc-400">smart traders.</span>
                         </h2>
                         
                         <p className="text-zinc-400 text-lg md:text-xl max-w-2xl leading-relaxed">
-                            From beginners to pros, your trading success starts here. 
-                            Get advanced analytics and AI insights completely free.
+                            Automated broker CSV sanitization, dynamic VWAP campaign clustering, and AI-powered discipline audits.
                         </p>
 
                         <div className="pt-4">
@@ -61,25 +60,15 @@ const HomePageFooter = () => {
                                     className="w-8 h-8"
                                 />
                             </div>
-                            <span className="font-bold text-xl tracking-tight">Journal</span>
+                            <span className="font-bold text-xl tracking-tight">VaultQuant</span>
                         </div>
                         
                         <p className="text-zinc-500 leading-relaxed text-lg">
-                            Your personal trading companion. Track market moves, analyze performance, 
-                            and sharpen your strategy with AI-powered insights.
+                            Your quantitative trading companion. Sanitize broker CSV transactions, aggregate campaign VWAPs, and audit strategy discipline with AI.
                         </p>
 
-                        <div className="flex items-center gap-4">
-                            <Link href="#" className="p-2 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-full transition-all">
-                                <Twitter className="w-5 h-5" />
-                            </Link>
-                            <Link href="#" className="p-2 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-full transition-all">
-                                <Github className="w-5 h-5" />
-                            </Link>
-                        </div>
-
-                        <div className="text-sm text-zinc-400">
-                            <p>© {new Date().getFullYear()} Trade Journal. All rights reserved.</p>
+                        <div className="text-sm text-zinc-400 pt-2">
+                            <p>© {new Date().getFullYear()} VaultQuant. All rights reserved.</p>
                         </div>
                     </div>
 
@@ -89,41 +78,34 @@ const HomePageFooter = () => {
                         <Accordion type="single" collapsible className="w-full space-y-4">
                             <AccordionItem value="item-1" className="border border-zinc-200 rounded-xl px-6 data-[state=open]:bg-zinc-50 transition-colors border-b-0">
                                 <AccordionTrigger className="hover:no-underline py-6 text-lg font-medium">
-                                    What is AI Trade Journal?
+                                    What is VaultQuant?
                                 </AccordionTrigger>
                                 <AccordionContent className="text-zinc-500 text-base leading-relaxed pb-6">
-                                    Trade Journal is your personal trading companion that keeps track of all your market moves, 
-                                    analyzes performance with advanced algorithms, and offers practical advice to sharpen your strategy. 
-                                    Simply log all your trades and let our AI generate in-depth reports.
+                                    VaultQuant is a Next-Gen Quantitative Trading Journal & Campaign Intelligence Engine. It automatically sanitizes broker CSV transactions, clusters scale-in orders into clean trade campaigns, calculates exact VWAPs, and provides AI-powered strategy audits.
                                 </AccordionContent>
                             </AccordionItem>
 
                             <AccordionItem value="item-2" className="border border-zinc-200 rounded-xl px-6 data-[state=open]:bg-zinc-50 transition-colors border-b-0">
                                 <AccordionTrigger className="hover:no-underline py-6 text-lg font-medium">
-                                    Is it completely free?
+                                    What broker CSV formats are supported?
                                 </AccordionTrigger>
                                 <AccordionContent className="text-zinc-500 text-base leading-relaxed pb-6">
-                                    Yes, AI Trading Journal is completely free to use. You get access to:
-                                    <ul className="mt-4 space-y-2 list-disc pl-4">
-                                        <li>Comprehensive Calendar & History</li>
-                                        <li>Advanced Statistics & Analytics</li>
-                                        <li>5 complimentary AI analysis tokens</li>
+                                    VaultQuant supports standard CSV exports from major brokers including:
+                                    <ul className="mt-4 grid grid-cols-2 gap-2">
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Futu / Moomoo (富途)</li>
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Interactive Brokers (IBKR)</li>
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Webull (微牛)</li>
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Charles Schwab & Robinhood</li>
                                     </ul>
                                 </AccordionContent>
                             </AccordionItem>
 
                             <AccordionItem value="item-3" className="border border-zinc-200 rounded-xl px-6 data-[state=open]:bg-zinc-50 transition-colors border-b-0">
                                 <AccordionTrigger className="hover:no-underline py-6 text-lg font-medium">
-                                    What assets are supported?
+                                    How does Campaign VWAP Clustering work?
                                 </AccordionTrigger>
                                 <AccordionContent className="text-zinc-500 text-base leading-relaxed pb-6">
-                                    We support all major asset classes including:
-                                    <ul className="mt-4 grid grid-cols-2 gap-2">
-                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Equities & ETFs</li>
-                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Cryptocurrencies</li>
-                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Forex Pairs</li>
-                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-400"/> Commodities</li>
-                                    </ul>
+                                    Instead of logging dozens of individual fill rows, VaultQuant's Campaign Engine groups multiple scale-in buys into a unified average position price (VWAP) and matches scale-out sells into clean trade cards with exact net PnL calculations.
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>

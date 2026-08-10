@@ -43,22 +43,19 @@ const HomePageStart = () => {
                         />
                     </div>
                     <div className="h-[20px] w-[0.5px] bg-zinc-300" />
-                    Trusted by over 1,000 traders worldwide!
+                    Trusted by over 1,000 quantitative & retail traders worldwide!
                 </div>
                 <h1 className="main-text text-[3rem] md:text-[6rem] max-md:my-1">
-                    AI Trade Journal
+                    VaultQuant
                 </h1>
                 <div className="mb-6 md:mb-10 flex flex-col items-center">
                     <h2 className="main-text text-[2rem] md:text-[3rem] flex items-center justify-center gap-2">
-                        {/* <mark /> */}
-                        {/* <span className="text-[var(--customOrange)]">Free</span> and
-                    <span className="text-[var(--customBlue)]"> Easy</span> way */}
                         <span className="!opacity-0">X</span>
                         <TypingAnimation />
                         <span className="!opacity-0">X</span>
                     </h2>
-                    <h2 className="main-text text-[2rem] md:text-[2rem] text-center">
-                        tool to track your trading achievements.
+                    <h2 className="main-text text-[1.5rem] md:text-[2rem] text-center max-w-2xl text-zinc-600 dark:text-zinc-400 font-normal">
+                        Next-Gen Quantitative Trading Journal & Campaign Intelligence Engine.
                     </h2>
                 </div>
                 <Link href="/private/intro">

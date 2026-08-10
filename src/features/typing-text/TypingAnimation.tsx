@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const stringsToType = ["Free and Powerful ", "Intuitive and Simple"];
+const stringsToType = [
+    "Quantify Your Edge ",
+    "Campaign VWAP Clustering ",
+    "AI Strategy & Discipline ",
+    "Lossless Broker CSV Import ",
+];
 
 const TypingAnimation = () => {
     const [text, setText] = useState("");
@@ -15,7 +20,7 @@ const TypingAnimation = () => {
     const delayBetweenStrings = 1000;
 
     useEffect(() => {
-        let timeout;
+        let timeout: NodeJS.Timeout;
         const currentString = stringsToType[stringIndex];
 
         if (typing) {

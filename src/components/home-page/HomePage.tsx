@@ -133,14 +133,9 @@ export default function HomePage() {
                             width={40}
                             height={40}
                         />
-                        <p id="logo-text" className="text-[1rem]">
-                            Journal
+                        <p id="logo-text" className="text-[1rem] font-bold tracking-tight">
+                            VaultQuant
                         </p>
-                        <p className="text-[1rem] md:hidden">&</p>
-                        <SiClaude
-                            size={24}
-                            className="text-[#da7756] md:hidden"
-                        />
                     </div>
                     <div className="hidden md:flex justify-center md:mr-[35px]">
                         <div id="nav-buttons" className="flex gap-2 lg:gap-4">
@@ -171,10 +166,10 @@ export default function HomePage() {
                         Charts
                     </span>
                     <h1 className="text-[1rem] sm:text-[2rem] 2xl:text-[3rem] text-center font-semibold">
-                        Trade like a professional.
+                        Quantify your trade edge.
                     </h1>
-                    <p className="text-[1rem]">
-                        Boost your performance with detailed charts.
+                    <p className="text-[1rem] text-zinc-300 max-w-xl text-center">
+                        Sanitize broker CSVs, cluster scale-ins into campaign VWAPs, and audit discipline with AI.
                     </p>
                 </div>
                 {/* <div className="absolute bottom-[100px] left-1/2 -translate-x-1/2 flex-center gap-2">
