@@ -1,6 +1,7 @@
 import HomePage from "@/components/home-page/HomePage";
 import { db } from "@/drizzle/db";
 import { UserTable } from "@/drizzle/schema";
+import { ensureLocalUser } from "@/server/actions/user";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -14,7 +15,8 @@ export default async function Home({
     const isPreview = params.preview === "true";
 
     if (!isPreview) {
-        // Check if local-user exists
+        // Ensure database tables and local-user exist
+        await ensureLocalUser();
         const user = await db.query.UserTable.findFirst({
             where: eq(UserTable.id, "local-user"),
         });

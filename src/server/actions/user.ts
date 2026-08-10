@@ -3,8 +3,92 @@
 import { db } from "@/drizzle/db";
 import { UserTable } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
+import { sql } from "drizzle-orm";
+
+let dbInitialized = false;
 
 export async function ensureLocalUser() {
+    if (!dbInitialized) {
+        try {
+            await db.run(sql`
+                CREATE TABLE IF NOT EXISTS \`user\` (
+                    \`id\` text PRIMARY KEY NOT NULL,
+                    \`name\` text DEFAULT '' NOT NULL,
+                    \`email\` text DEFAULT '' NOT NULL,
+                    \`capital\` text,
+                    \`created_at\` text NOT NULL,
+                    \`tokens\` integer DEFAULT 5,
+                    \`onboarding_completed\` integer DEFAULT false NOT NULL,
+                    \`open_custom_field_names\` text,
+                    \`close_custom_field_names\` text
+                );
+            `);
+            await db.run(sql`
+                CREATE TABLE IF NOT EXISTS \`strategies\` (
+                    \`id\` text PRIMARY KEY NOT NULL,
+                    \`userId\` text NOT NULL,
+                    \`strategyName\` text NOT NULL,
+                    \`description\` text,
+                    \`open_position_rules\` text,
+                    \`close_position_rules\` text,
+                    \`created_at\` text NOT NULL,
+                    \`updated_at\` text NOT NULL
+                );
+            `);
+            await db.run(sql`
+                CREATE TABLE IF NOT EXISTS \`trades\` (
+                    \`id\` text PRIMARY KEY NOT NULL,
+                    \`userId\` text NOT NULL,
+                    \`positionType\` text NOT NULL,
+                    \`openDate\` text NOT NULL,
+                    \`openTime\` text NOT NULL,
+                    \`closeDate\` text,
+                    \`closeTime\` text,
+                    \`isActiveTrade\` integer DEFAULT true NOT NULL,
+                    \`instrumentName\` text,
+                    \`symbolName\` text NOT NULL,
+                    \`entryPrice\` text,
+                    \`deposit\` text,
+                    \`result\` text,
+                    \`totalCost\` text,
+                    \`quantity\` text,
+                    \`sellPrice\` text,
+                    \`quantitySold\` text,
+                    \`notes\` text,
+                    \`rating\` integer DEFAULT 0,
+                    \`strategy_id\` text,
+                    \`applied_open_rules\` text,
+                    \`applied_close_rules\` text,
+                    \`close_events\` text,
+                    \`open_other_details\` text,
+                    \`close_other_details\` text
+                );
+            `);
+            await db.run(sql`
+                CREATE TABLE IF NOT EXISTS \`journal\` (
+                    \`id\` text PRIMARY KEY NOT NULL,
+                    \`user_id\` text NOT NULL,
+                    \`date\` text NOT NULL,
+                    \`content\` text,
+                    \`created_at\` text NOT NULL,
+                    \`updated_at\` text NOT NULL
+                );
+            `);
+            await db.run(sql`
+                CREATE TABLE IF NOT EXISTS \`reports\` (
+                    \`id\` text PRIMARY KEY NOT NULL,
+                    \`user_id\` text NOT NULL,
+                    \`created_at\` text NOT NULL,
+                    \`report_data\` text NOT NULL,
+                    \`is_favorite\` integer DEFAULT false NOT NULL
+                );
+            `);
+            dbInitialized = true;
+        } catch (initErr) {
+            console.error("Error creating tables:", initErr);
+        }
+    }
+
     try {
         const user = await db.query.UserTable.findFirst({
             where: eq(UserTable.id, "local-user"),
@@ -18,10 +102,10 @@ export async function ensureLocalUser() {
                 capital: "10000",
                 tokens: 5,
                 onboardingCompleted: false,
-            });
+            }).onConflictDoNothing();
         }
-    } catch (err) {
-        console.error("Error ensuring local user exists:", err);
+    } catch (err: any) {
+        console.error("Error ensuring local user:", err);
     }
 }
 
@@ -74,7 +158,6 @@ export async function checkIfUserHasTokens(): Promise<
     | { success: true; tokens: number | null }
     | { success: false; message: string }
 > {
-    // Single user local version has unlimited tokens
     return { success: true, tokens: 9999 };
 }
 
@@ -133,9 +216,8 @@ export async function addCustomFieldName(
             ? (user.openCustomFieldNames as string[]) || []
             : (user.closeCustomFieldNames as string[]) || [];
 
-        // Check if field already exists
         if (currentFields.includes(fieldName)) {
-            return { success: true }; // Already exists, no need to add
+            return { success: true };
         }
 
         const updatedFields = [...currentFields, fieldName];
