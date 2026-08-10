@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getAllTradeRecords } from "@/server/actions/trades";
 import { getAllStrategies } from "@/server/actions/strategies";
 import PrivateLayoutClient from "@/components/private-layout/PrivateLayoutClient";
