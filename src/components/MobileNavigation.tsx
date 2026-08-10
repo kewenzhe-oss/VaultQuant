@@ -21,10 +21,11 @@ export default function MobileNavigation() {
                 <div className="flex justify-between p-[18px] items-center">
                     <div className="flex items-center gap-2">
                         <Image
-                            src="/logo.svg"
-                            alt="logo"
-                            width={42}
-                            height={42}
+                            src="/main-logo.png"
+                            alt="VaultQuant Logo"
+                            width={32}
+                            height={32}
+                            className="rounded-lg object-cover"
                         />
                         <p className="font-semibold text-[1.5rem] ml-2">
                             Daily Journal

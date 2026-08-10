@@ -128,10 +128,11 @@ export default function HomePage() {
                     className="flex items-center justify-between text-sm p-3 w-full rounded-2xl bg-white max-md:shadow-md">
                     <div className="flex gap-3 items-center">
                         <Image
-                            src="/logo.svg"
-                            alt="logo"
+                            src="/main-logo.png"
+                            alt="VaultQuant Logo"
                             width={40}
                             height={40}
+                            className="rounded-xl object-cover"
                         />
                         <p id="logo-text" className="text-[1rem] font-bold tracking-tight">
                             VaultQuant

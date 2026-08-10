@@ -53,11 +53,11 @@ const HomePageFooter = () => {
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-zinc-100 rounded-xl">
                                 <Image
-                                    src="/logo.svg"
-                                    alt="logo"
+                                    src="/main-logo.png"
+                                    alt="VaultQuant Logo"
                                     width={32}
                                     height={32}
-                                    className="w-8 h-8"
+                                    className="w-8 h-8 rounded-lg object-cover"
                                 />
                             </div>
                             <span className="font-bold text-xl tracking-tight">VaultQuant</span>
