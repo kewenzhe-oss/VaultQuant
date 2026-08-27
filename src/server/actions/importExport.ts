@@ -65,23 +65,43 @@ export async function previewImportAction(
             }
 
             if (csvRecords[0]["symbolName"] && csvRecords[0]["positionType"]) {
-                compiledTrades = csvRecords.map((r) => ({
-                    id: r.id || `trade-${Date.now()}-${Math.random()}`,
-                    symbolName: r.symbolName,
-                    instrumentName: r.symbolName,
-                    positionType: r.positionType,
-                    openDate: r.openDate,
-                    openTime: r.openTime || "09:30:00",
-                    closeDate: r.closeDate || undefined,
-                    closeTime: r.closeTime || undefined,
-                    entryPrice: r.entryPrice || undefined,
-                    quantity: r.quantity || undefined,
-                    sellPrice: r.sellPrice || undefined,
-                    result: r.result || undefined,
-                    isActiveTrade: r.isActiveTrade === "true",
-                    notes: r.notes || undefined,
-                    rating: 0,
-                }));
+                compiledTrades = csvRecords.map((r) => {
+                    let parsedCloseEvents = undefined;
+                    if (r.closeEvents && r.closeEvents.trim() !== "") {
+                        try {
+                            parsedCloseEvents = JSON.parse(r.closeEvents);
+                        } catch {
+                            parsedCloseEvents = undefined;
+                        }
+                    }
+                    let parsedOpenOther = undefined;
+                    if (r.openOtherDetails && r.openOtherDetails.trim() !== "") {
+                        try {
+                            parsedOpenOther = JSON.parse(r.openOtherDetails);
+                        } catch {
+                            parsedOpenOther = undefined;
+                        }
+                    }
+                    return {
+                        id: r.id || `trade-${Date.now()}-${Math.random()}`,
+                        symbolName: r.symbolName,
+                        instrumentName: r.symbolName,
+                        positionType: r.positionType as "buy" | "sell",
+                        openDate: r.openDate,
+                        openTime: r.openTime || "09:30:00",
+                        closeDate: r.closeDate || undefined,
+                        closeTime: r.closeTime || undefined,
+                        entryPrice: r.entryPrice || undefined,
+                        quantity: r.quantity || undefined,
+                        sellPrice: r.sellPrice || undefined,
+                        result: r.result || undefined,
+                        isActiveTrade: r.isActiveTrade === "true",
+                        notes: r.notes || undefined,
+                        rating: 0,
+                        closeEvents: parsedCloseEvents,
+                        openOtherDetails: parsedOpenOther,
+                    };
+                });
                 sanitizedCount = compiledTrades.length;
             } else {
                 const rawTxList = convertCSVRecordsToRawTransactions(csvRecords);
@@ -246,6 +266,9 @@ export async function exportTradesCSVAction(): Promise<string> {
         notes: t.notes || undefined,
         rating: t.rating || 0,
         strategyId: t.strategyId || null,
+        closeEvents: t.closeEvents || undefined,
+        openOtherDetails: t.openOtherDetails || undefined,
+        closeOtherDetails: t.closeOtherDetails || undefined,
     }));
 
     return exportTradesToCSV(typedTrades);

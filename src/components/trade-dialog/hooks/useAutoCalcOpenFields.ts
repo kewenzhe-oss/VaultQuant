@@ -5,22 +5,16 @@ import { FieldPath, FieldPathValue, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { newTradeFormSchema } from "@/zodSchema/schema";
 
-type FormType = z.infer<typeof newTradeFormSchema>;
+import { toNum } from "./useAutoCalcResult";
 
-function toNum(value?: string): number | undefined {
-    if (value == null) return undefined;
-    const trimmed = value.trim();
-    if (trimmed === "") return undefined;
-    const n = Number(trimmed);
-    return Number.isFinite(n) ? n : undefined;
-}
+type FormType = z.infer<typeof newTradeFormSchema>;
 
 export function useAutoCalcOpenFields(form: UseFormReturn<FormType>) {
     const { watch, setValue } = form;
 
-    const entryPrice = watch("entryPrice"); // string
-    const quantity = watch("quantity"); // string
-    const deposit = watch("deposit"); // string
+    const entryPrice = watch("entryPrice");
+    const quantity = watch("quantity");
+    const deposit = watch("deposit");
 
     // Debounce timer reference
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -51,7 +45,7 @@ export function useAutoCalcOpenFields(form: UseFormReturn<FormType>) {
                 decimals: number
             ) => {
                 const current = watch(name);
-                if (current && current.trim() !== "") return; // user already entered something
+                if (toNum(current) != null) return; // user already entered something
                 const next = value.toFixed(decimals);
                 if (current !== next) {
                     setValue(name, next as FieldPathValue<FormType, K>, { shouldDirty: true, shouldValidate: true });
@@ -60,17 +54,17 @@ export function useAutoCalcOpenFields(form: UseFormReturn<FormType>) {
             };
 
             // Compute missing third value when exactly two are present
-            if (e != null && q != null && (deposit == null || deposit.trim() === "")) {
+            if (e != null && q != null && d == null) {
                 setIfEmptyAndChanged("deposit", e * q, 2);
                 return;
             }
 
-            if (d != null && q != null && (entryPrice == null || entryPrice.trim() === "")) {
+            if (d != null && q != null && e == null) {
                 if (q !== 0) setIfEmptyAndChanged("entryPrice", d / q, 2);
                 return;
             }
 
-            if (d != null && e != null && (quantity == null || quantity.trim() === "")) {
+            if (d != null && e != null && q == null) {
                 if (e !== 0) setIfEmptyAndChanged("quantity", d / e, 6);
                 return;
             }
