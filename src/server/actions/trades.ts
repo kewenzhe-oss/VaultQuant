@@ -73,7 +73,8 @@ export async function createNewTradeRecord(
 
             const existingActive = existingTrades.find((t) => {
                 const isActive = t.isActiveTrade !== false && (!t.closeDate || t.closeDate === "");
-                return (t.symbolName || "").trim().toUpperCase() === cleanSym &&
+                return isActive &&
+                       (t.symbolName || "").trim().toUpperCase() === cleanSym &&
                        (t.positionType || "").toLowerCase() === posType;
             });
 

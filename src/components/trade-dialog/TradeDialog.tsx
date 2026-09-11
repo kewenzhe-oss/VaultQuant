@@ -90,6 +90,20 @@ export const TradeDialog = ({
         setActiveTab("adjust-position");
     };
 
+    const tradesInStore = useAppSelector((state) => state.tradeRecords.listOfTrades);
+    const formSymbol = (tradeForm.form.watch("symbolName") || "").trim().toUpperCase();
+    const formPositionType = (tradeForm.form.watch("positionType") || "").toLowerCase();
+
+    const hasMatchingActiveTrade = useMemo(() => {
+        if (editMode || !formSymbol || !formPositionType || !tradesInStore) return false;
+        return tradesInStore.some((t) => {
+            const isActive = t.isActiveTrade !== false && (!t.closeDate || t.closeDate === "");
+            return isActive &&
+                   (t.symbolName || "").trim().toUpperCase() === formSymbol &&
+                   (t.positionType || "").toLowerCase() === formPositionType;
+        });
+    }, [editMode, formSymbol, formPositionType, tradesInStore]);
+
     if (activeTab === "adjust-position" && (adjustTargetTrade || existingTrade)) {
         const tradeToAdjust = adjustTargetTrade || existingTrade!;
         return (
@@ -107,19 +121,6 @@ export const TradeDialog = ({
             </div>
         );
     }
-
-    const tradesInStore = useAppSelector((state) => state.tradeRecords.listOfTrades);
-    const formSymbol = (tradeForm.form.watch("symbolName") || "").trim().toUpperCase();
-    const formPositionType = (tradeForm.form.watch("positionType") || "").toLowerCase();
-
-    const hasMatchingActiveTrade = useMemo(() => {
-        if (editMode || !formSymbol || !formPositionType || !tradesInStore) return false;
-        return tradesInStore.some((t) => {
-            const isActive = t.isActiveTrade !== false && (!t.closeDate || t.closeDate === "");
-            return (t.symbolName || "").trim().toUpperCase() === formSymbol &&
-                   (t.positionType || "").toLowerCase() === formPositionType;
-        });
-    }, [editMode, formSymbol, formPositionType, tradesInStore]);
 
     return (
         <form

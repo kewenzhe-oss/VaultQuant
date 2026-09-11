@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { format } from "date-fns";
 import { CalendarIcon, Info, ArrowLeft, PlusCircle, MinusCircle, XCircle } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
@@ -115,20 +115,20 @@ export const AdjustPositionTab = ({
     const adjustQtyValue = watch("adjustQty");
     const adjustPriceValue = watch("adjustPrice");
 
-    const handleModeChange = (newMode: "add" | "reduce" | "close") => {
+    const handleModeChange = useCallback((newMode: "add" | "reduce" | "close") => {
         setMode(newMode);
         if (newMode === "close") {
             setValue("adjustQty", String(originalQty), { shouldValidate: true });
         } else if (mode === "close") {
             setValue("adjustQty", "", { shouldValidate: false });
         }
-    };
+    }, [setValue, originalQty, mode]);
 
     useEffect(() => {
         if (initialAdjustMode) {
             handleModeChange(initialAdjustMode);
         }
-    }, [initialAdjustMode]);
+    }, [initialAdjustMode, handleModeChange]);
 
     const handleQuickPercent = (pct: number) => {
         if (pct === 100) {

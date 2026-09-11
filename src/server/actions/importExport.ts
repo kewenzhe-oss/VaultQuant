@@ -117,13 +117,13 @@ export async function previewImportAction(
             sanitizedCount,
             campaigns: compiledTrades,
         };
-    } catch (err: any) {
+    } catch (err: unknown) {
         return {
             success: false,
             rawRecordCount: 0,
             sanitizedCount: 0,
             campaigns: [],
-            error: err.message || "Failed to preview file",
+            error: err instanceof Error ? err.message : "Failed to preview file",
         };
     }
 }
@@ -228,12 +228,12 @@ export async function importTradesAction(
             importedCount: compiledTrades.length,
             trades: compiledTrades,
         };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Failed to import trades:", error);
         return {
             success: false,
             importedCount: 0,
-            error: error.message || "Failed to process import file",
+            error: error instanceof Error ? error.message : "Failed to process import file",
         };
     }
 }

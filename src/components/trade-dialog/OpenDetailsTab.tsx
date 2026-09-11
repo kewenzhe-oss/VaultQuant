@@ -44,7 +44,6 @@ export const OpenDetailsTab = ({
     form,
     openDate,
     setOpenDate,
-    symbolLabels,
     day,
     userFieldNames,
     onFieldNamesChange,

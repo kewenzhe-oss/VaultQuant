@@ -505,7 +505,6 @@ export const OpenTradesTable = ({ trades }: OpenTradesTableProps) => {
                                             <div className="space-y-1.5">
                                                 {pos.allEvents.map((event, index) => {
                                                     const isScaleIn = event.eventType === "add" || event.isInitialOpen;
-                                                    const isScaleOut = event.eventType === "reduce";
                                                     const isFullClose = event.eventType === "close";
 
                                                     return (
