@@ -221,7 +221,7 @@ export const TradeDialog = ({
                                 title={
                                     !editMode && hasMatchingActiveTrade
                                         ? "An open position already exists. Use Add to Pos / Reduce Pos / Close Pos to adjust it."
-                                        : tradeForm.validationState === "invalid" && !tradeForm.bypassValidation
+                                        : !editMode && tradeForm.validationState === "invalid" && !tradeForm.bypassValidation
                                         ? "Symbol has no market data. Price tracking will be unavailable."
                                         : undefined
                                 }
@@ -232,7 +232,7 @@ export const TradeDialog = ({
                                     disabled={
                                         tradeForm.submittingTrade ||
                                         tradeForm.validationState === "validating" ||
-                                        (tradeForm.validationState === "invalid" && !tradeForm.bypassValidation) ||
+                                        (!editMode && tradeForm.validationState === "invalid" && !tradeForm.bypassValidation) ||
                                         (!editMode && hasMatchingActiveTrade)
                                     }
                                 >
